@@ -1,0 +1,876 @@
+{
+	"articles": {
+		"description": "The table `articles` contains an inventory of scientific articles reporting biochar incubation experiments.",
+		"fields": [{
+				"name": "ID_art",
+				"longName": "Identifier of the article",
+                "type":"integer",
+				"description": "The unique identifier (integer) given to an article containing biochar incubation observations. The identifer is also used in the tables data & metadata."
+			},
+			{
+				"name": "AuthorDate",
+				"longName": "First author and publication year",
+                "type":"string",
+				"description": "A short text identifier of the article with last name of first author and publication year."
+			},
+			{
+				"name": "FullCitation",
+				"longName": "Full citation of the article",
+                "type":"string",
+				"description": "The full citation of the article, in text format."
+			},
+			{
+				"name": "DOI",
+				"longName": "Digital Object Identifier",
+                "type":"url",
+				"description": "The DOI of the article, for easy online access."
+			},
+			{
+				"name": "ContactAuthor",
+				"longName": "Contact author email address",
+                "type":"email",
+				"description": "Email address of the contact author of the manuscript, as available in published article, or as in mail correspondance with author."
+			},
+			{
+				"name": "RawData_status",
+				"longName": "Status of the raw data",
+                "type":"boolean",
+				"description": "Describes whether the raw data (incubation data & meta data) are available in the database. Values can be: yes, no."
+			},
+			{
+				"name": "RawData_remark",
+				"longName": "Remark on the status of the raw data",
+                "type":"string",
+				"description": "How was the data collected (from author, digitized, supporting information, from other person than authors) or why it was not possible to collect the data (author contacted but no reply received)."
+			},
+			{
+				"name": "RawData_copyright",
+				"longName": "Copyright regarding the raw data",
+                "type":"boolean",
+				"description": "Describes to what extent the data can be shared in a public database. By default, the value is `NotPublic`.  It can be labelled `Public` if the data was obtained from authors with their approval for sharing, if it was digitized manually, or if the article was published open-source. TO_DO: discuss that."
+			},
+			{
+				"name": "NbObs",
+				"longName": "Number of observations",
+                "type":"int",
+				"description": "The number of observations reported in this article (replicates of a given experimental setup count as a single observation)."
+			},
+			{
+				"name": "Spokas2010",
+				"longName": "Article included in Spokas 2010",
+                "type":"boolean",
+				"description": "Whether the article was included in the earlier biochar stability estimates by Spokas (2010)."
+			},	
+			{
+				"name": "Singh2012",
+				"longName": "Article included in Sing 2012",
+                "type":"boolean",
+				"description": "Whether the article was included in the earlier biochar stability estimates by Singh (2012)."
+			},
+			{
+				"name": "Budai2013",
+				"longName": "Article included in Budai 2013",
+                "type":"boolean",
+				"description": "Whether the article was included in the earlier biochar stability estimates by Budai (2013), non-peer reviewed work performed for the International Biochar Institute."
+			},
+			{
+				"name": "Wang2016",
+				"longName": "Article included in Wang 2016",
+                "type":"boolean",
+				"description": "Whether the article was included in the earlier biochar stability estimates by Wang (2016)."
+			},
+			{
+				"name": "Lehmann2019",
+				"longName": "Article included in Lehmann 2019",
+                "type":"boolean",
+				"description": "Whether the article was included in the earlier biochar stability estimates by Lehmann (2019), referring to the appendix of the 2019 revision of the IPCC greenhouse gas inventory guidelines."
+			},
+			{
+				"name": "Woolf2021",
+				"longName": "Article included in Woolf 2021",
+                "type":"boolean",
+				"description": "Whether the article was included in the earlier biochar stability estimates by Woolf (2021)."
+			}											
+		]
+	},
+	"data": {
+		"description": "The table `data` contains the decomposition time series for each individual observation (statistical average of the replicates). Depending on how the incubation data is reported, the 3 variables (biochar remaining, biochar decomposed, biochar decay rate) can be re-calculated knowing at least one of them.",
+		"fields": [{
+				"name": "ID_obs",
+				"longName": "Identifier of the observation",
+                "type":"integer",
+                "unit": "none",   
+				"description": "The unique identifier (integer) given to a biochar incubation observation, i.e. any single experiment leading to a decay curve for a given biochar in a given environment, including replicates. Same field as in the tables article & metadata."
+			},
+			{
+				"name": "ID_art",
+				"longName": "Identifier of the article",
+                "type":"integer",
+                "unit": "none",
+				"description": "The unique identifier (integer) given to a peer-reviewed article reporting biochar incubation data. Same field as in the tables article & metadata."
+			},
+			{
+				"name": "time",
+				"longName": "Time, in days, relative",
+                "type":"float",
+                "unit": "days",
+				"description": "Time of incubation starting at t=0 when incubation starts. Usually, at t=0, the biochar decomposed is equal to 0 and the amount remaining is equal to 100. Time values, in days, can be of type float (decimals) when data were retrieved by digitizing figures."
+			},
+			{
+				"name": "date",
+				"longName": "Time, in days, relative",
+                "type":"float",
+                "unit": "days",
+				"description": "Time of incubation starting at t=0 when incubation starts. Usually, at t=0, the biochar decomposed is equal to 0 and the amount remaining is equal to 100. Time values, in days, can be of type float (decimals) when data were retrieved by digitizing figures."
+			},
+			{
+				"name": "biochar remaining",
+				"longName": "Date, in YYYY-MM-DD, absolute",
+                "type":"float",
+                "unit": "YYYY-MM-DD",                
+				"description": "Real date at which incubation took place."
+			},
+			{
+				"name": "F_tot_abs",
+				"longName": "",
+                "type":"",
+                "unit": "gC tot / kg soil",                
+				"description": "Total flux of carbon dioxide (expressed in C) mineralised between two measuring times, in absolute terms."
+			},
+			{
+				"name": "d_bc",
+				"longName": "",
+                "type":"",
+                "unit": "%",                
+				"description": "Share of biochar carbon in the mineralised flux of carbon, determined by isotopic technique"
+			},
+			{
+				"name": "d_soc",
+				"longName": "",
+                "type":"",
+                "unit": "%",                
+				"description": "Share of soil organic carbon in the mineralised flux of carbon, determined by isotopic technique"
+			},
+			{
+				"name": "F_bc_abs",
+				"longName": "",
+                "type":"",
+                "unit": "gC bc / kg soil",                
+				"description": "Flux of biochar carbon (expressed in C) mineralised between two measuring times, in absolute terms."
+			},
+			{
+				"name": "F_soc_abs",
+				"longName": "",
+                "type":"",
+                "unit": "gC soc / kg soil",                
+				"description": "Flux of soil organic carbon (expressed in C) mineralised between two measuring times, in absolute terms."
+			},
+			{
+				"name": "F_bc_rel",
+				"longName": "",
+                "type":"",
+                "unit": "gC bc/ gC bc ini",                
+				"description": "Flux of biochar carbon (expressed in C) mineralised between two measuring times, in relative unit (divided by initial amount of biochar carbon)."
+			},
+			{
+				"name": "F_soc_rel",
+				"longName": "",
+                "type":"",
+                "unit": "gC soc/ gC soc ini",                
+				"description": "Flux of soil organic carbon (expressed in C) mineralised between two measuring times, in relative unit (divided by initial amount of soil organic carbon)."
+			},
+			{
+				"name": "Fn_soc_abs",
+				"longName": "",
+                "type":"",
+                "unit": "gC soc / kg soil",                
+				"description": "Flux of soil organic carbon (expressed in C) mineralised between two measuring times, in absolute terms, in the control experiment."
+			},
+			{
+				"name": "Fn_soc_rel",
+				"longName": "",
+                "type":"",
+                "unit": "gC soc / gC soc ini",                
+				"description": "Flux of soil organic carbon (expressed in C) mineralised between two measuring times, in relative unit (divided by initial amount of soil organic carbon), in the control experiment"
+			},
+			{
+				"name": "k_tot_abs",
+				"longName": "",
+                "type":"",
+                "unit": "gC tot / kg soil / day",                
+				"description": "Decay rate of total soil carbon (biochar and soil), average between two measuring times, in absolute terms."
+			},
+			{
+				"name": "k_bc_abs",
+				"longName": "",
+                "type":"",
+                "unit": "gC bc / kg soil / day",                
+				"description": "Decay rate of biochar carbon, average between two measuring times, in absolute terms."
+			},
+			{
+				"name": "k_soc_abs",
+				"longName": "",
+                "type":"",
+                "unit": "gC soc / kg soil / day",                
+				"description": "Decay rate of soil organic carbon, average between two measuring times, in absolute terms."
+			},
+			{
+				"name": "k_bc_rel0",
+				"longName": "",
+                "type":"",
+                "unit": "gC bc / gC bc ini / day",                
+				"description": "Decay rate of biochar carbon, average between two measuring times, in relative terms (divided by initial amount of biochar carbon)."
+			},
+			{
+				"name": "k_bc_reld",
+				"longName": "",
+                "type":"",
+                "unit": "gC bc / gC bc t-1 / day",                
+				"description": "Decay rate of biochar carbon, average between two measuring times, in relative terms, dynamic (divided by biochar carbon remaining at the previous time step)."
+			},
+			{
+				"name": "C_bc_loss_abs",
+				"longName": "",
+                "type":"",
+                "unit": "gC bc / kg soil",                
+				"description": "Cumulative biochar carbon loss since start of incubation, absolute"
+			},
+			{
+				"name": "C_bc_loss_rel",
+				"longName": "",
+                "type":"",
+                "unit": "gC bc / gC bc ini",                
+				"description": "Cumulative biochar carbon loss since start of incubation, relative to initial amount of biochar carbon"
+			},
+			{
+				"name": "C_bc_rem_abs",
+				"longName": "",
+                "type":"",
+                "unit": "gC bc / kg soil",                
+				"description": "Cumulative biochar carbon remaining since start of incubation, absolute"
+			},
+			{
+				"name": "C_bc_rem_rel",
+				"longName": "",
+                "type":"",
+                "unit": "gC bc / gC bc ini",                
+				"description": "Cumulative biochar carbon remaining since start of incubation, relative to initial amount of biochar carbon"
+			},
+			{
+				"name": "C_tot_loss_abs",
+				"longName": "",
+                "type":"",
+                "unit": "gC tot/ kg soil",                
+				"description": "Cumulative carbon loss since start of incubation, absolute"
+			},
+			{
+				"name": "C_tot_loss_rel",
+				"longName": "",
+                "type":"",
+                "unit": "gC tot / gC ini",                
+				"description": "Cumulative carbon loss since start of incubation, relative to initial amount of biochar and soil organic carbon"
+			},
+			{
+				"name": "P_soc_abs",
+				"longName": "",
+                "type":"",
+                "unit": "gC soc - gC n soc",                
+				"description": "Priming flux of soil organic carbon, absolute (flux of SOC in biochar incubation minus flux of SOC in control incubation)"
+			},
+			{
+				"name": "P_soc_rel",
+				"longName": "",
+                "type":"",
+                "unit": "gC soc / gC soc ini",                
+				"description": "Priming flux of soil organic carbon, relative (flux of SOC in biochar incubation minus flux of SOC in control incubation, divided by initial amount of SOC)"
+			}
+		]
+	},
+	"metadata": {
+		"description": "The table `metadata` contains a set of metadata describing the experimental conditions of each biochar incubation. The fields in this table relate to the type of biomass, the pyrolysis conditions, the biochar properties, and the incubation conditions.",
+		"fields": [{
+			"name": "ID_obs",
+			"longName": "Identifier of the observation",
+			"type":"integer",
+			"unit": "none",
+			"group":"identification",
+			"method":"na",   
+			"description": "The unique identifier (integer) given to a biochar incubation observation, i.e. any single experiment leading to a decay curve for a given biochar in a given environment, including replicates. Same field as in the tables article & metadata."
+		},
+		{
+			"name": "ID_art",
+			"longName": "Identifier of the article",
+			"type":"integer",
+			"unit": "none",
+			"group":"identification",
+			"method":"na",
+			"description": "The unique identifier (integer) given to a peer-reviewed article reporting biochar incubation data. Same field as in the tables article & data."
+		},
+		{
+			"name": "AuthorDate",
+			"longName": "First author and publication year",
+			"type":"string",
+			"unit": "none",
+			"group":"identification",
+			"method":"na",
+			"description": "A short text identifier of the article with last name of first author and publication year."
+		},
+		{
+			"name": "NameObs",
+			"longName": "Name or identifier of the observation in the original research article",
+			"type":"string",
+			"unit": "none",
+			"group":"identification",
+			"method":"na",
+			"description": "The name or identifier of the observation as in the original article from which it is taken. This field allows to easily cross-check the information collected from the original article."
+		},
+		{
+			"name": "Replicates",
+			"longName": "Number of replicates",
+			"type":"integer",
+			"unit": "none",
+			"group":"identification",
+			"method":"na",
+			"description": "The number of replicates performed for this specific observation."
+		},
+		{
+			"name": "Biomass",
+			"longName": "Name of the biomass",
+			"type":"string",
+			"unit": "none",
+			"group":"biomass",
+			"method":"na",
+			"description": "The name the biomass used to produce biochar. Text can be as detailed as necessary (e.g. type, species, cultivation details)."
+		},
+		{
+			"name": "BiomassClass",
+			"longName": "Name of the biomass class",
+			"type":"string",
+			"unit": "none",
+			"group":"biomass",
+			"method":"na",
+			"description": "Classification of the biomass feedstocks in a few number of categories: wood, grass, crop-residue, manure, biosolids. TO_DO: agree on a list of classes."
+		},
+		{
+			"name": "BiomassLignin",
+			"longName": "Lignin content of the biomass",
+			"type":"float",
+			"unit": "%",
+			"group":"biomass",
+			"method":"na",
+			"description": "The average lignin content of the biomass feedstock, either reported from the authors or taken from database on biomass properties."
+		},
+		{
+			"name": "Pyrolysis",
+			"longName": "Pyrolysis process description",
+			"type":"string",
+			"unit": "none",
+			"group":"pyrolysis",
+			"method":"na",
+			"description": "Brief description of the pyrolysis process (e.g. reactor type, brand, scale, process conditions)."
+		},
+		{
+			"name": "PyrolysisClass",
+			"longName": "Name of the pyrolysis class",
+			"type":"string",
+			"unit": "none",
+			"group":"pyrolysis",
+			"method":"na",
+			"description": "Classification of the pyrolysis processes into a few number of categories: pyro-slow, gas, htc, pyr-flash, no-treat, torr. Note: no-treat can be used to describe raw biomass incubation."
+		},
+		{
+			"name": "HHT",
+			"longName": "Pyrolysis Highest Treatment Temperature",
+			"type":"float",
+			"unit": "°C",
+			"group":"pyrolysis",
+			"method":"na",
+			"description": "The Highest Treatment Temperature reached during the pyrolysis, as reported in the article. Note: there is an uncertainty related to determination of pyrolysis temperature."
+		},
+		{
+			"name": "RT",
+			"longName": "Pyrolysis Residence time at the Highest Treatment Temperature",
+			"type":"float",
+			"unit": "min",
+			"group":"pyrolysis",
+			"method":"na",
+			"description": "The residence time at the Highest Treatment Temperature during the pyrolysis. Note: often difficult to distinguish the total residence time in the reactor from the residence time at the highest treatment temperature, in the information available in articles."
+		},
+		{
+			"name": "HR",
+			"longName": "Pyrolysis Heating Rate",
+			"type":"float",
+			"unit": "°C per min",
+			"group":"pyrolysis",
+			"method":"na",
+			"description": "The pyrolysis heating rate, i.e. the average speed at which the biomass feedstock is heated during the pyrolysis, until it reaches the highest treatment temperature, as reported in the article."
+		},
+		{
+			"name": "Soil type",
+			"longName": "Soil type",
+			"type":"string",
+			"unit": "none",
+			"group":"incubation",
+			"method":"na",
+			"description": "Brief description of the soil type used for the incubation, e.g. using soil classification standards."
+		},
+		{
+			"name": "Soil clay content",
+			"longName": "Clay content of the soil",
+			"type":"float",
+			"unit": "%",
+			"group":"incubation",
+			"method":"na",
+			"description": "Clay content of the soil, as reported by authors."
+		},
+		{
+			"name": "Soil sand content",
+			"longName": "Sand content of the soil",
+			"type":"float",
+			"unit": "%",
+			"group":"incubation",
+			"method":"na",
+			"description": "Sand content of the soil, as reported by authors."
+		},
+		{
+			"name": "Soil silt content",
+			"longName": "Silt content of the soil",
+			"type":"float",
+			"unit": "%",
+			"group":"incubation",
+			"method":"na",
+			"description": "Silt content of the soil, as reported by authors."
+		},
+		{
+			"name": "Soil organic matter content",
+			"longName": "Organic matter content of the soil",
+			"type":"float",
+			"unit": "%",
+			"group":"incubation",
+			"method":"na",
+			"description": "Organic matter content of the soil, as reported by authors (neglecting inorganic carbon content). TO_DO: decide if total carbon content rather than organic matter content is preferable?."
+		},
+		{
+			"name": "SoilMoisture_Absolute",
+			"longName": "Absolute moisture content of the soil",
+			"type":"float",
+			"unit": "%",
+			"group":"incubation",
+			"method":"na",
+			"description": "Absolute moisture content of the soil, as reported by authors. It can be maintained constant in laboratory incubations, while it may vary with climate in field experiments. In that case, a climatic average can be reported."
+		},
+		{
+			"name": "SoilMoisture_WHC",
+			"longName": "Moisture content of the soil relative to WHC",
+			"type":"float",
+			"unit": "% WHC",
+			"group":"incubation",
+			"method":"na",
+			"description": "Moisture content of the soil relative to the soil's water holding capacity, as reported by authors. It can be maintained constant in laboratory incubations, while it may vary with climate in field experiments. In that case, a climatic average can be reported."
+		},
+		{
+			"name": "pH_soil",
+			"longName": "Soil pH",
+			"type":"float",
+			"unit": "none",
+			"group":"incubation",
+			"method":"na",
+			"description": "pH of the soil before mixing addition of biochar"
+		},
+		{
+			"name": "pH_bc-soil",
+			"longName": "Soil-biochar blend pH",
+			"type":"float",
+			"unit": "none",
+			"group":"incubation",
+			"method":"na",
+			"description": "pH of the soil after addition of biochar"
+		},
+		{
+			"name": "SoilOrigin",
+			"longName": "Geographic origin of the soil sample",
+			"type":"string",
+			"unit": "none",
+			"group":"incubation",
+			"method":"na",
+			"description": "Geographic origin of the soil sample used for incubation, reported as a text value."
+		},
+		{
+			"name": "SoilGeolocation",
+			"longName": "Geographical coordinates of the soil sample",
+			"type":"tuple",
+			"unit": "none",
+			"group":"incubation",
+			"method":"na",
+			"description": "Geographical coordinates of the site of extraction of the soil sample, given as a tuple (latitude, longitude) in decimal format. If only a region is given, the approximative center of the region is used."
+		},
+		{
+			"name": "LabField",
+			"longName": "Lab or field experiment",
+			"type":"boolean",
+			"unit": "none",
+			"group":"incubation",
+			"method":"na",
+			"description": "Whether the incubation is carried out in a lab environment (`lab`) or in the field (`field`)."
+		},
+		{
+			"name": "Cultivated",
+			"longName": "Lab or field experiment",
+			"type":"boolean",
+			"unit": "none",
+			"group":"incubation",
+			"method":"na",
+			"description": "Whether the plants are cultivated in the incubation experiment, `yes` or `no`."
+		},
+		{
+			"name": "IncubationTemperature",
+			"longName": "Temperature of the incubation",
+			"type":"float",
+			"unit": "°C",
+			"group":"incubation",
+			"method":"na",
+			"description": "For lab experiments, average incubation temperature as reported by authors. For field experiments, climatic average temperature at the field where the experiment is located."
+		},
+		{
+			"name": "IncubationDuration",
+			"longName": "Duration of the incubation",
+			"type":"float",
+			"unit": "days",
+			"group":"incubation",
+			"method":"na",
+			"description": "During of the incubation experiment, expressed in days."
+		},
+		{
+			"name": "ApplicationRate",
+			"longName": "Biochar application rate to the soil",
+			"type":"float",
+			"unit": "%, dry weight / dry weight",
+			"group":"incubation",
+			"method":"na",
+			"description": "Biochar application rate to the soil."
+		},
+		{
+			"name": "TotalFluxMeasurement",
+			"longName": "Total Flux Measurement method",
+			"type":"string",
+			"unit": "none",
+			"group":"incubation",
+			"method":"na",
+			"description": "How the total flux of decomposed carbon dioxide was measured in the incubation. This field can be e.g. titration"
+		},
+		{
+			"name": "BiocharFluxDetermination",
+			"longName": "Biochar Flux Determination method",
+			"type":"string",
+			"unit": "none",
+			"group":"incubation",
+			"method":"na",
+			"description": "How the fraction of the total flux of decomposed carbon dioxide attributed to biochar was determined. This field can take one of the following values: `13C natural abundance`, `13C depleted`, `14C labeled`, `13C labeled`, `13C isotopic signature`, `Headspace CO2, coulometer, no other source of C in soil`. TO_DO: some namings may be equivalent, to check."
+		},
+		{
+			"name": "OtherIncubationDescription",
+			"longName": "Other Incubation Description",
+			"type":"string",
+			"unit": "none",
+			"group":"incubation",
+			"method":"na",
+			"description": "Other information on the incubation experimental setup not covered in other fields. In particular: aged biochar process if any; microbial activity measures or community stucture."
+		},
+		{
+			"name": "AssociatedControl",
+			"longName": "AssociatedControl",
+			"type":"boolean",
+			"unit": "none",
+			"group":"incubation",
+			"method":"na",
+			"description": "Whether the biochar incubation was performed alongside a control incubation without biochar: `yes`, `no`"
+		},
+		{
+			"name": "Ash550",
+			"longName": "Biochar ash content at 550°C",
+			"type":"float",
+			"unit": "%, dry weight / dry weight",
+			"group":"biochar",
+			"method":"na",
+			"description": "Biochar ash content at 550°C as determined in lab analysis. TO_DO: add references to appropriate laboratory methods (DIN, ASTM)."
+		},
+		{
+			"name": "Ash700",
+			"longName": "Biochar ash content at 700°C",
+			"type":"float",
+			"unit": "%, dry weight / dry weight",
+			"group":"biochar",
+			"method":"na",
+			"description": "Biochar ash content at 700°C as determined in lab analysis. TO_DO: add references to appropriate laboratory methods (DIN, ASTM)."
+		},
+		{
+			"name": "Carbon",
+			"longName": "Biochar carbon content",
+			"type":"float",
+			"unit": "%, dry weight / dry weight",
+			"group":"biochar",
+			"method":"na",
+			"description": "Biochar (total) carbon content, as determined in lab analysis."
+		},
+		{
+			"name": "Carbon, organic",
+			"longName": "Biochar organic carbon content",
+			"type":"float",
+			"unit": "%, dry weight / dry weight",
+			"group":"biochar",
+			"method":"na",
+			"description": "Biochar organic carbon content, as determined in lab analysis."
+		},
+		{
+			"name": "Hydrogen",
+			"longName": "Biochar hydrogen content",
+			"type":"float",
+			"unit": "%, dry weight / dry weight",
+			"group":"biochar",
+			"method":"na",
+			"description": "Biochar hydrogen content, as determined in lab analysis."
+		},
+		{
+			"name": "Nitrogen",
+			"longName": "Biochar nitrogen content",
+			"type":"float",
+			"unit": "%, dry weight / dry weight",
+			"group":"biochar",
+			"method":"na",
+			"description": "Biochar nitrogen content, as determined in lab analysis."
+		},
+		{
+			"name": "Sulphur",
+			"longName": "Biochar sulphur content",
+			"type":"float",
+			"unit": "%, dry weight / dry weight",
+			"group":"biochar",
+			"method":"na",
+			"description": "Biochar sulphur content, as determined in lab analysis."
+		},
+		{
+			"name": "Oxygen",
+			"longName": "Biochar oxygen content",
+			"type":"float",
+			"unit": "%, dry weight / dry weight",
+			"group":"biochar",
+			"method":"na",
+			"description": "Biochar oxygen content, as determined in lab analysis or more commonly calculated as 100-C-H-N-S."
+		},
+		{
+			"name": "Magnesium",
+			"longName": "Biochar magnesium content",
+			"type":"float",
+			"unit": "%, dry weight / dry weight",
+			"group":"biochar",
+			"method":"na",
+			"description": "Biochar magnesium content, as determined in lab analysis."
+		},
+		{
+			"name": "Potassium",
+			"longName": "Biochar potassium content",
+			"type":"float",
+			"unit": "%, dry weight / dry weight",
+			"group":"biochar",
+			"method":"na",
+			"description": "Biochar potassium content, as determined in lab analysis."
+		},
+		{
+			"name": "H/C_org",
+			"longName": "Hydrogen to organic carbon molar ratio",
+			"type":"float",
+			"unit": "%, dry weight / dry weight",
+			"group":"biochar",
+			"method":"na",
+			"description": "Hydrogen to organic carbon molar ratio of the biochar sample, either as reported by authors or recaculated from elemental composition. TO_DO: discuss what to do if C_org or H is not reported; if we know about ash composition or not, re-estimate C_org or H from the rest?"
+		},
+		{
+			"name": "H/C_tot",
+			"longName": "Hydrogen to carbon molar ratio",
+			"type":"float",
+			"unit": "%, dry weight / dry weight",
+			"group":"biochar",
+			"method":"na",
+			"description": "Hydrogen to total carbon molar ratio of the biochar sample, either as reported by authors or recaculated from elemental composition."
+		},
+		{
+			"name": "O/C_org",
+			"longName": "Oxygen to organic carbon molar ratio",
+			"type":"float",
+			"unit": "%, dry weight / dry weight",
+			"group":"biochar",
+			"method":"na",
+			"description": "Oxygen to organic carbon molar ratio of the biochar sample, either as reported by authors or recaculated from elemental composition. TO_DO: discuss whether to include it at all, whether it should be O/C or O_org/C_org or O/C_org, knowing O_org is never/impractical to measure. Argument to include O/C: reproduce earlier Spokas 2010 results."
+		},
+		{
+			"name": "C/N",
+			"longName": "Carbon to nitrogen molar ratio",
+			"type":"float",
+			"unit": "%, dry weight / dry weight",
+			"group":"biochar",
+			"method":"na",
+			"description": "Carbon to nitrogen molar ratio of the biochar sample, either as reported by authors or recaculated from elemental composition."
+		},
+		{
+			"name": "pH_H2O",
+			"longName": "Biochar pH in H2O",
+			"type":"float",
+			"unit": "none",
+			"group":"biochar",
+			"method":"na",
+			"description": "pH of the biochar sample in water, at 1:5 ratio."
+		},
+		{
+			"name": "pH_CaCl2",
+			"longName": "Biochar pH in CaCl2",
+			"type":"float",
+			"unit": "none",
+			"group":"biochar",
+			"method":"na",
+			"description": "pH of the biochar sample in calcium chloride, at 1:5 ratio."
+		},
+		{
+			"name": "CEC",
+			"longName": "Cation Exchange Capacity",
+			"type":"float",
+			"unit": "cmol / kg",
+			"group":"biochar",
+			"method":"na",
+			"description": "Cation Exchange Capacity of biochar sample"
+		},
+		{
+			"name": "SA_N2",
+			"longName": "Surface area with N2",
+			"type":"float",
+			"unit": "m2 / g",
+			"group":"biochar",
+			"method":"na",
+			"description": "Surface area of biochar sample measured with dinitrogen gas."
+		},
+		{
+			"name": "SA_CO2",
+			"longName": "Surface area with CO2",
+			"type":"float",
+			"unit": "m2 / g",
+			"group":"biochar",
+			"method":"na",
+			"description": "Surface area of biochar sample measured with carbon dioxide gas."
+		},
+		{
+			"name": "FixedCarbon",
+			"longName": "Fixed carbon",
+			"type":"float",
+			"unit": "%, dry weight / dry weight",
+			"group":"biochar",
+			"method":"na",
+			"description": "Fixed carbon of biochar sample as determined in proximate analysis."
+		},
+		{
+			"name": "VolatileMatter",
+			"longName": "Volatile Matter",
+			"type":"float",
+			"unit": "%, dry weight / dry weight",
+			"group":"biochar",
+			"method":"na",
+			"description": "Volatile matter of biochar sample as determined in proximate analysis."
+		},
+		{
+			"name": "ParticleSize",
+			"longName": "Particle Size",
+			"type":"string",
+			"unit": "?",
+			"group":"biochar",
+			"method":"na",
+			"description": "Average biochar particle size at the time of incubation."
+		},
+		{
+			"name": "BulkDensity",
+			"longName": "Bulk density",
+			"type":"float",
+			"unit": "kg / m3, dry weight",
+			"group":"biochar",
+			"method":"na",
+			"description": "Bulk density of incubated biochar, measured at its particle size (not grinded), untapped. TO_DO: discuss whether needed (rarely available)"
+		},
+		{
+			"name": "TrueDensity",
+			"longName": "Bulk density",
+			"type":"float",
+			"unit": "g / cm3, dry weight",
+			"group":"biochar",
+			"method":"na",
+			"description": "True density of incubated biochar, as measured in laboratory analysis (finely grinded)."
+		},
+		{
+			"name": "OxidationH2O2",
+			"longName": "Chemical oxidation with H2O2",
+			"type":"float",
+			"unit": "g / cm3, dry weight",
+			"group":"biochar",
+			"method":"Cross, A.; Sohi, S.P. A method for screening the relative long-term stability of biochar. GCB Bioenergy 2013, 5, 215-220",
+			"description": "Chemical oxidation with hydrogen peroxide, according to Edinburgh stability test."
+		},
+		{
+			"name": "BiocharYield",
+			"longName": "Yield from biomass to biochar",
+			"type":"float",
+			"unit": "%, dry weight / dry weight",
+			"group":"biochar",
+			"method":"na",
+			"description": "The pyrolysis yield as biochar dry mass over biomass dry mass"
+		},
+		{
+			"name": "δ ¹³C biochar",
+			"longName": "Biochar isotopic signature",
+			"type":"",
+			"unit": "",
+			"group":"biochar",
+			"method":"na",
+			"description": "Ratio of isotopes 13C / 12C in the biochar studied, before incubation"
+		},
+		{
+			"name": "δ ¹³C soil",
+			"longName": "Soil isotopic signature",
+			"type":"",
+			"unit": "",
+			"group":"biochar",
+			"method":"na",
+			"description": "Ratio of isotopes 13C / 12C in the soil studied, before incubation"
+		},
+		{
+			"name": "ID_Lehmann2019",
+			"longName": "Identifier of this observation in Lehmann 2019",
+			"type":"str",
+			"unit": "na",
+			"group":"identification",
+			"method":"na",
+			"description": "Identifier of this observation in Lehmann 2019 (see Excel files in folder former-assessments)"
+		},
+		{
+			"name": "ID_Woolf2021",
+			"longName": "Identifier of this observation in Woolf 2021",
+			"type":"str",
+			"unit": "na",
+			"group":"identification",
+			"method":"na",
+			"description": "Identifier of this observation in Woolf 2021 (see Excel files in folder former-assessments)"
+		},
+		{
+			"name": "ID_Lehmann2021",
+			"longName": "Identifier of this observation in Lehmann 2021",
+			"type":"str",
+			"unit": "na",
+			"group":"identification",
+			"method":"na",
+			"description": "Identifier of this observation in Lehmann 2021 (see Excel files in folder former-assessments)"
+		}
+		]
+	},
+	"metadata_validation": {
+		"description": "The table `metadata_validation` contains two additional fields for each field in the `metadata` tables. The table `metadata_validation` is used for data validation, tracability and transparency. The two fields are `fieldName_comment` and `fieldName_loci`. The field `fieldName_comment` describes how the metadata was retrieved and if any assumptions/calculations were made by the person compiling the data. The field `fieldName_loci` explains where the metadata was found, e.g. Article, Table 3; Article, Section 2.3, p230; SupportingMaterial, Table S3; SupportingMaterial, Excel; DocumentFromAuthors; ReferenceInArticle, Table 2. If needed.",
+		"fields": [{
+			"name": "ID_obs",
+			"type":"string"
+		}]
+	}
+}
