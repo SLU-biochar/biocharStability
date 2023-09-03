@@ -52,38 +52,20 @@ model_names = {
 def singleExp(t, k):
     return 100*np.exp(-k*t)
 
-def k_singleExp(t, k):
-    return (100*(k)*np.exp(-k*t))/100
-
 def singleExp_u(t, k, c):
     return c*np.exp(-k*t)
-
-def k_singleExp_u(t, k, c):
-    return (c*(k)*np.exp(-k*t))/100
 
 def doubleExp(t, k1, k2, c1):
     return c1*np.exp(-k1*t)+ (100-c1)*np.exp(-k2*t)
 
-def k_doubleExp(t, k1, k2, c1):
-    return (c1*(k1)*np.exp(-k1*t)+ (100-c1)*(k2)*np.exp(-k2*t))/100
-
 def doubleExp_u(t, k1, k2, c1, c2):
     return c1*np.exp(-k1*t)+ c2*np.exp(-k2*t)
-
-def k_doubleExp_u(t, k1, k2, c1, c2):
-    return (c1*(k1)*np.exp(-k1*t)+ c2*(k2)*np.exp(-k2*t))/100
 
 def tripleExp(t, k1, k2, k3, c1, c2):
     return c1*np.exp(-k1*t)+ c2*np.exp(-k2*t) + (100-c1-c2)*np.exp(-k3*t)
 
-def k_tripleExp(t, k1, k2, k3, c1, c2):
-    return ( c1*(k1)*np.exp(-k1*t)+ c2*(k2)*np.exp(-k2*t) + (100-c1-c2)*(k3)*np.exp(-k3*t) )/100
-
 def tripleExp_u(t, k1, k2, k3, c1, c2, c3):
     return c1*np.exp(-k1*t)+ c2*np.exp(-k2*t) + c3*np.exp(-k3*t)
-
-def k_tripleExp_u(t, k1, k2, k3, c1, c2, c3):
-    return (c1*(k1)*np.exp(-k1*t)+ c2*(k2)*np.exp(-k2*t) + c3*(k3)*np.exp(-k3*t))/100
 
 def powerModel(t, c0, b, m):
     # as defined in Zimmerman 2011
@@ -95,9 +77,18 @@ def powerModel(t, c0, b, m):
         z = c0*np.exp(b)/(m+1)*(t**(m+1)) + c0*np.exp(b)/(m+1)*(0.001**(m+1)) + c0
     return z
 
-def k_powerModel(t, c0, b, m):
-    # as defined in Zimmerman 2011
-    return (-c0 * np.exp(b) * t**m)/100
+def powerModel_q10(t, fT, c0, b, m):
+    # as defined in Zimmerman 2011, with own recalculation for a different temperature based on k --> k*fT + re-integrate
+    #print(m)
+    if m > -1:
+        z = c0 - c0*fT*np.exp(b)/(m+1)*(t**(m+1))
+    elif m == -1:
+        z = c0*(1-np.exp(b)*fT*np.log(t))
+    elif m < -1:
+        z = c0*fT*np.exp(b)/(m+1)*(t**(m+1)) + c0*fT*np.exp(b)/(m+1)*(0.001**(m+1)) + c0
+    else:
+        z = np.nan
+    return z 
 
 def powerModel_lim(t, c0, b, m, L=10*365):
     '''
@@ -152,18 +143,27 @@ def powerModel_lim(t, c0, b, m, L=10*365):
         
     return z
 
-def powerModel_q10(t, fT, c0, b, m):
-    # as defined in Zimmerman 2011, with own recalculation for a different temperature based on k --> k*fT + re-integrate
-    #print(m)
-    if m > -1:
-        z = c0 - c0*fT*np.exp(b)/(m+1)*(t**(m+1))
-    elif m == -1:
-        z = c0*(1-np.exp(b)*fT*np.log(t))
-    elif m < -1:
-        z = c0*fT*np.exp(b)/(m+1)*(t**(m+1)) + c0*fT*np.exp(b)/(m+1)*(0.001**(m+1)) + c0
-    else:
-        z = np.nan
-    return z 
+def k_singleExp(t, k):
+    return (100*(k)*np.exp(-k*t))/100
+
+def k_singleExp_u(t, k, c):
+    return (c*(k)*np.exp(-k*t))/100
+
+def k_doubleExp(t, k1, k2, c1):
+    return (c1*(k1)*np.exp(-k1*t)+ (100-c1)*(k2)*np.exp(-k2*t))/100
+
+def k_doubleExp_u(t, k1, k2, c1, c2):
+    return (c1*(k1)*np.exp(-k1*t)+ c2*(k2)*np.exp(-k2*t))/100
+
+def k_tripleExp(t, k1, k2, k3, c1, c2):
+    return ( c1*(k1)*np.exp(-k1*t)+ c2*(k2)*np.exp(-k2*t) + (100-c1-c2)*(k3)*np.exp(-k3*t) )/100
+
+def k_tripleExp_u(t, k1, k2, k3, c1, c2, c3):
+    return (c1*(k1)*np.exp(-k1*t)+ c2*(k2)*np.exp(-k2*t) + c3*(k3)*np.exp(-k3*t))/100
+
+def k_powerModel(t, c0, b, m):
+    # as defined in Zimmerman 2011
+    return (-c0 * np.exp(b) * t**m)/100
 
 map_model_function = {
     "singleExp":singleExp,

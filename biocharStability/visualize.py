@@ -279,6 +279,10 @@ def plot_multi_fits(ID_obs, x, y, xdataHighRes, sub, metadata, ax=None, fig=None
        
     # fit data
     for i, fit in sub.iterrows():
+        if ('strategy', 'strategy', 'str') in fit.index:
+            strat = fit[('strategy', 'strategy', 'str')]
+        else:
+            strat = 'fit'
         f_model = map_model_function[fit[tpl_model]]
         method = fit[tpl_method]
         r2= fit[tpl_r2]
@@ -288,8 +292,8 @@ def plot_multi_fits(ID_obs, x, y, xdataHighRes, sub, metadata, ax=None, fig=None
         p_opt_names, p_opt = sort_params(f_model, params)
         
         ax.plot(xdataHighRes, f_model(xdataHighRes, *p_opt), '-',
-                label='fit: {fit}, R\u00B2= {r2:.5f}, BIC= {bic:.2f}, DW= {dw:.2f}'.format(
-                        fit=f_model.__name__+'_'+str(method), 
+                label='{fit}, R\u00B2= {r2:.5f}, BIC= {bic:.2f}, DW= {dw:.2f}'.format(
+                        fit=strat+': '+f_model.__name__+'_'+str(method), 
                         r2=r2, 
                         bic=bic, 
                         dw=dw),
