@@ -3,7 +3,6 @@
 
 # Simulations output
 simulations/
-manuscript/
 .xlsx
 
 # Byte-compiled / optimized / DLL files

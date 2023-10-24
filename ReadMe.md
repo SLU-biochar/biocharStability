@@ -6,7 +6,7 @@
 |        **Webinars** 	| https://www.youtube.com/watch?v=FqWrpOK8RS0 (2023-04 / EGU)	<br> https://www.youtube.com/watch?v=VXL3c4kX9tY (2022-06 / NegCO2) |
 |    **Start / End** 	| 2022-01 to 2025                             	|
 |   **Contact points** 	| kolinlagringattraknamed@2050.se (general request) <br> elias@ecoleaf.consulting (data & library) |
-|       **Publication** 	| *manuscript under submission, pre-print not yet available*                    	|
+|       **Publication** 	| *manuscript submitted to Geoderma, under review, pre-print available <br > Azzi, Elias Sebastian and Li, Haichao and Cederlund, Harald and Karltun, Erik and Sundberg, Cecilia, Modelling Biochar Long-Term Carbon Storage in Soil with Harmonized Analysis of Incubation Data. Available at SSRN: http://dx.doi.org/10.2139/ssrn.4601106                  	|
 |       **How to cite?** 	|  Azzi, E. S. (2023). biocharStability - dataset of biochar incubations, alongside code to analyse it [Dataset & Code]. https://github.com/SLU-biochar/biocharStability                   	|
 |       **License** 	| [![CC BY-SA 4.0][cc-by-sa-image]][cc-by-sa]                             	|
 
