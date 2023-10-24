@@ -111,7 +111,7 @@ def plot_timeseries_by_group(
     if isinstance(color_list, str):
         L = list(metadata[color_list].unique())
         L.remove('nan')
-        color_dict = dict(zip(L, sns.color_palette("hls", 8)))
+        color_dict = dict(zip(L, sns.color_palette("hls", 6)))
 
         # Initialize empty lists for legend handles and labels
         legend_handles = []
