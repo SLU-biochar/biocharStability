@@ -2,7 +2,9 @@
 # Visit https://bit.ly/cffinit to generate yours today!
 
 cff-version: 1.2.0
-title: biocharStability - dataset of biochar incubations, alongside code to analyse it
+title: >-
+  biocharStability - dataset of biochar decomposition
+  experiments, alongside code to analyse it
 message: >-
   If you use this dataset and/or the code provided, please
   cite it using the metadata.
@@ -15,6 +17,9 @@ identifiers:
   - type: url
     value: 'https://github.com/SLU-biochar/biocharStability'
     description: GitHub Repository
+  - type: doi
+    value: 10.1016/j.geoderma.2023.116761
+    description: Peer-reviewed article associated to repository
 repository-code: 'https://github.com/SLU-biochar/biocharStability'
 abstract: >-
   This library contains both the dataset compiled and the
@@ -22,4 +27,3 @@ abstract: >-
   incubation experiments, and model durability of carbon
   storage with biochar.
 license: CC-BY-SA-4.0
-date-released: '2023-07-07'
