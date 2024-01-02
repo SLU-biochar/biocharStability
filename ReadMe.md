@@ -1,13 +1,13 @@
-# biocharStability - dataset of biochar incubations, alongside code to analyse it
+# biocharStability - dataset of biochar decomposition experiments, alongside code to analyse it
 
 |           **Info** 	| Dataset of biochar incubations, alongside code to analyse it	|
 |-------------------:	|---------------------------------------------	|
-|        **Website** 	| https://biochar.systems/stability/  <br> https://biochar.systems/durability-statement/       	|
+|        **Website** 	| https://biochar.systems/stability/  <br> https://biochar.systems/durability-statement/   <br> https://biochar.systems/stability/guidelines/   	|
 |        **Webinars** 	| https://www.youtube.com/watch?v=FqWrpOK8RS0 (2023-04 / EGU)	<br> https://www.youtube.com/watch?v=VXL3c4kX9tY (2022-06 / NegCO2) |
 |    **Start / End** 	| 2022-01 to 2025                             	|
-|   **Contact points** 	| kolinlagringattraknamed@2050.se (general request) <br> elias@ecoleaf.consulting (data & library) |
-|       **Publication** 	| Manuscript submitted to Geoderma, under review, pre-print available <br > Azzi, Elias Sebastian and Li, Haichao and Cederlund, Harald and Karltun, Erik and Sundberg, Cecilia, **Modelling Biochar Long-Term Carbon Storage in Soil with Harmonized Analysis of Incubation Data**. Available at SSRN: http://dx.doi.org/10.2139/ssrn.4601106                  	|
-|       **How to cite?** 	|  Azzi, E. S. (2023). biocharStability - dataset of biochar incubations, alongside code to analyse it [Dataset & Code]. https://github.com/SLU-biochar/biocharStability                   	|
+|   **Contact points** 	| kolinlagringattraknamed@2050.se (general requests) <br> elias@ecoleaf.consulting (data & library) |
+|       **Peer-reviewed article** 	| Azzi, E.S., Li, H., Cederlund, H., Karltun, E., Sundberg, C., 2024. **Modelling biochar long-term carbon storage in soil with harmonized analysis of decomposition data**. Geoderma 441, 116761. https://doi.org/10.1016/j.geoderma.2023.116761              	|
+|       **How to cite?** 	|  Please cite this dataset using the peer-reviewed article referenced above.  	|
 |       **License** 	| [![CC BY-SA 4.0][cc-by-sa-image]][cc-by-sa]                             	|
 
 The climate change mitigation benefits of biochar systems arise to a large extent from **carbon storage in biochar** However, there are on-going scientific discussions on how to precisely estimate the **durability of biochar carbon storage in soils**. Estimates vary from decades to millennia, building on different evidence, modelling approaches and theories.
@@ -33,7 +33,7 @@ This library contains both the ``dataset`` compiled and the ``code`` developed d
 - Demonstration and development ``notebooks `` are provided:
     - in the folder `` notebooks-demo ``, curated notebooks are shared to give an introduction of how to work with the library. These notebooks are a good starting point for new users.
     - in the folder `` notebooks-dev ``, notebooks used during development and  research are shared. These notebooks can be interesting for advanced users. Warning: they are provided without guarantee.  
-- Notebooks used for the academic publication associated to this work are in the folder ``manuscript`` (not yet available)
+- Notebooks used for the academic peer-reviewed publication associated to this work are in the folder ``manuscript`` 
 - Outputs of simulations can be saved in a folder ``simulation`` that is not synced on GitHub (cf. gitignore)
 
 ## HOW TO INSTALL OR USE?
